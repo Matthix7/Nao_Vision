@@ -9,9 +9,9 @@ import cv2
 import numpy as np
 
 
-def getCentreBall(image):
-    # Take each frame
-    frame = image
+def getCentreBall(frame):
+    
+    rows,cols,height = frame.shape
     
     # Convert BGR to HSV
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -59,8 +59,10 @@ def getCentreBall(image):
     
     cv2.imshow('Reco_balles',frame)
 #    cv2.waitKey(0)
+
+    centreError = (center1[0]-rows/2, center1[1]-cols/2)
     
-    return center1,radius1
+    return centreError, center1, radius1
 
 
 
