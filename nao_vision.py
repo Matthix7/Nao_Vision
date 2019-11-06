@@ -8,7 +8,9 @@ Created on Tue Jan 22 10:23:40 2019
 import cv2
 import numpy as np
 
-
+def getDistance(radius, Sf = , buoySize = 0.09):
+    distBuoy = buoySize/tan(2*radius*Sf)
+    
 def getCentreBall(frame):
     
     rows,cols,height = frame.shape
@@ -70,6 +72,7 @@ def getCentreBall(frame):
     
         if radius1 > 5:
             found = True
+            cv2.imwrite('sample.png',frame)
         else:
             found = False
     
