@@ -20,9 +20,9 @@ def getCentreBall(image):
     # voir https://www.google.com/search?client=firefox-b&q=%23D9E80F
     # convertir valeur dans [0,179], [0,255], [0,255]
     
-    teinte_min = 42
-    teinte_max = 82
-    sat_min = 10
+    teinte_min = 30
+    teinte_max = 70
+    sat_min = 30
     sat_max = 255
     val_min = 50
     val_max = 255
@@ -33,7 +33,7 @@ def getCentreBall(image):
     
     # Threshold the HSV image to get only yellow/green colors
     mask1 = cv2.inRange(hsv, lower_yellow, upper_yellow)
-    mask1 = cv2.medianBlur(mask1, 5)
+    mask1 = cv2.medianBlur(mask1, 11)
     
     
     # Bitwise-AND mask and original image
@@ -45,11 +45,11 @@ def getCentreBall(image):
     
     
     ret1,thresh1 = cv2.threshold(mask1,127,255,0)
-    im2,contours1,hierarchy1 = cv2.findContours(thresh1, 1, 2)
+    im2,contours1,hierarchy1 = cv2.findContours(thresh1, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
     cnt1 = contours1[0]
     
     
-    (x1,y1),radius1 = cv2.minEnclosingCircle(cnt1)
+    (x1,y1),radius1 = cv2 .minEnclosingCircle(cnt1)
     center1 = (int(x1),int(y1))
     radius1 = int(radius1)
     
@@ -58,19 +58,38 @@ def getCentreBall(image):
     print("Centre balle 1 :", center1)
     
     cv2.imshow('Reco_balles',frame)
-    cv2.waitKey(1)
+#    cv2.waitKey(0)
     
     return center1,radius1
 
 
-image = cv2.imread("naoreal_0003.png")
-c, r = getCentreBall(image)
+
+# Real images
+for i in range(422):
+    print("NewImage", str(i).zfill(4))
+    try:
+        image = cv2.imread("/home/matthieu/Documents/Annee_3/UV56_Visual_Servoing/naorealimgs/naoreal_"+str(i).zfill(4)+".png")
+        c, r = getCentreBall(image)
+    except:
+        print("Unable to read that image")
+    key = cv2.waitKey(0) & 0xFF
+    if key == 27:
+        break
 
 
 
 
-
-
+#Simu images
+#for i in range(131):
+#    print("NewImage", str(i).zfill(4))
+#    try:
+#        image = cv2.imread("/home/matthieu/Documents/Annee_3/UV56_Visual_Servoing/naosimimgs/naosimimg_"+str(i).zfill(4)+".png")
+#        c, r = getCentreBall(image)
+#    except:
+#        print("Unable to read that image")
+#    key = cv2.waitKey(0) & 0xFF
+#    if key == 27:
+#        break
 
 
 
