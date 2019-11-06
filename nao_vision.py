@@ -38,34 +38,40 @@ def getCentreBall(frame):
     
     # Bitwise-AND mask and original image
     res = cv2.bitwise_and(frame,frame, mask= mask1)
-    cv2.imshow('frame',frame)
-    cv2.imshow('mask',mask1)
-    cv2.imshow('res',res)
+    #cv2.imshow('frame',frame)
+    #cv2.imshow('mask',mask1)
+    #cv2.imshow('res',res)
     
     
     
     ret1,thresh1 = cv2.threshold(mask1,127,255,0)
     contours1,hierarchy1 = cv2.findContours(thresh1, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-    cnt1 = contours1[0]
     
-    
-    (x1,y1),radius1 = cv2 .minEnclosingCircle(cnt1)
-    center1 = (int(x1),int(y1))
-    radius1 = int(radius1)
-    
-    cv2.circle(frame,center1,radius1,(255,0,0),2)
-    
-    print("Centre balle 1 :", center1)
-    
-    cv2.imshow('Reco_balles',frame)
-#    cv2.waitKey(0)
-
-    centreError = ((center1[0]-rows/2)*100/rows, (center1[1]-cols/2)*100/cols)
-    
-    if radius1 > 10:
-        found = True
-    else:
+    if len(contours1) == 0:
         found = False
+        centreError, center1, radius1 = (0,0),0,0
+
+    else:
+        cnt1 = contours1[0]
+        
+        (x1,y1),radius1 = cv2 .minEnclosingCircle(cnt1)
+        center1 = (int(x1),int(y1))
+        radius1 = int(radius1)
+        
+        cv2.circle(frame,center1,radius1,(0,255,0),2)
+        
+        #print("Centre balle 1 :", center1)
+        #print("Centre Img", (cols/2,rows/2))
+        
+        cv2.imshow('Reco_balles',frame)
+    #    cv2.waitKey(0)
+
+        centreError = ((cols/2-center1[0])*100/cols, (center1[1]-rows/2)*100/rows)
+    
+        if radius1 > 5:
+            found = True
+        else:
+            found = False
     
     return found, centreError, center1, radius1
 
