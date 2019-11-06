@@ -7,7 +7,7 @@ import random
 import math
 import os
 import signal
-from nao_vision import getCentreBall
+from nao_vision import getCentreBall, getDistance
 
 # specific to my laptop version (do not exist on Centos Students PCs)
 #import Image
@@ -248,7 +248,7 @@ while missed < 30:
       corrH =  k*centreError[0] + dtLoop * ki * np.sum(errIntH)
       corrV =  k*centreError[1] + dtLoop * ki * np.sum(errIntV)
       angles = [max(-angleLimits[0],min(angleLimits[0],angles[0] + corrH)), max(angleLimits[1],min(angleLimits[2],angles[1] + corrV))]
-      print corrH, corrV
+      print "Distance ", getDistance(radiusBall), "Radius",  radiusBall
       motionProxy.setAngles(names, angles, fractionMaxSpeed)
 
    else:

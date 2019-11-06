@@ -7,9 +7,13 @@ Created on Tue Jan 22 10:23:40 2019
 
 import cv2
 import numpy as np
+from math import tan
 
-def getDistance(radius, Sf = 2, buoySize = 0.09):
+def getDistance(radius):
+    buoySize = 0.09
+    Sf = tan(buoySize)/(175-150)
     distBuoy = buoySize/tan(2*radius*Sf)
+    return distBuoy
     
 def getCentreBall(frame):
     
@@ -22,12 +26,12 @@ def getCentreBall(frame):
     # voir https://www.google.com/search?client=firefox-b&q=%23D9E80F
     # convertir valeur dans [0,179], [0,255], [0,255]
     
-    teinte_min = 30
-    teinte_max = 70
-    sat_min = 30
-    sat_max = 255
-    val_min = 50
-    val_max = 255
+    teinte_min = 55
+    teinte_max = 75
+    sat_min = 50
+    sat_max = 100
+    val_min = 0
+    val_max = 100
     
     lower_yellow = np.array([int(teinte_min/2),int(sat_min*255/100),int(val_min*255/100)])
     upper_yellow = np.array([int(teinte_max/2),int(sat_max*255/100),int(val_max*255/100)])
@@ -47,7 +51,7 @@ def getCentreBall(frame):
     
     
     ret1,thresh1 = cv2.threshold(mask1,127,255,0)
-    contours1,hierarchy1 = cv2.findContours(thresh1, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    im2,contours1,hierarchy1 = cv2.findContours(thresh1, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     
     if len(contours1) == 0:
         found = False
@@ -72,12 +76,12 @@ def getCentreBall(frame):
     
         if radius1 > 5:
             found = True
-            cv2.imwrite('sample.png',frame)
-            print "Saved image"
+#            cv2.imwrite('sample.png',frame)
+#            print "Saved image"
         else:
             found = False
     
-    return found, centreError, center1, radius1
+    return found, centreError, center1, radius1+1
 
 
 
