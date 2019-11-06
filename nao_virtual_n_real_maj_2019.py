@@ -55,6 +55,8 @@ debug=False
 saveImgs=False
 imgCount=0
 
+angleLimits = [119*np.pi/180,-38*np.pi/180,29*np.pi/180]
+
 IP = "localhost"  # NaoQi's IP address.
 PORT = 11212  # NaoQi's port
 # if one NAO in the scene PORT is 11212
@@ -245,7 +247,7 @@ while missed < 30:
       errIntV.append(centreError[1])
       corrH =  k*centreError[0] + dtLoop * ki * np.sum(errIntH)
       corrV =  k*centreError[1] + dtLoop * ki * np.sum(errIntV)
-      angles = [angles[0] + corrH, angles[1] + corrV]
+      angles = [max(-angleLimits[0],min(angleLimits[0],angles[0] + corrH)), max(angleLimits[1],min(angleLimits[2],angles[1] + corrV))]
       print corrH, corrV
       motionProxy.setAngles(names, angles, fractionMaxSpeed)
 

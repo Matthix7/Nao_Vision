@@ -72,7 +72,7 @@ def getCentreBall(frame):
     
         if radius1 > 5:
             found = True
-            cv2.imwrite('/home/matthieu/Documents/Annee_3/UV56_Visual_Servoing/sample.png',frame)
+            cv2.imwrite('sample.png',frame)
             print "Saved image"
         else:
             found = False
