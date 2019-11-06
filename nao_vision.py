@@ -45,7 +45,7 @@ def getCentreBall(frame):
     
     
     ret1,thresh1 = cv2.threshold(mask1,127,255,0)
-    im2,contours1,hierarchy1 = cv2.findContours(thresh1, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
+    im2,contours1,hierarchy1 = cv2.findContours(thresh1, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     cnt1 = contours1[0]
     
     
@@ -60,9 +60,14 @@ def getCentreBall(frame):
     cv2.imshow('Reco_balles',frame)
 #    cv2.waitKey(0)
 
-    centreError = (center1[0]-rows/2, center1[1]-cols/2)
+    centreError = ((center1[0]-rows/2)*100/rows, (center1[1]-cols/2)*100/cols)
     
-    return centreError, center1, radius1
+    if radius1 > 10:
+        found = True
+    else:
+        found = False
+    
+    return found, centreError, center1, radius1
 
 
 

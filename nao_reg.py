@@ -15,7 +15,7 @@ while(True):
     ret, frame = cap.read()
 
      #Convert BGR to HSV
-    error, center, radius = getCentreBall(frame)
+    found, error, center, radius = getCentreBall(frame)
 
 # When everything done, release the capture
 cap.release()
