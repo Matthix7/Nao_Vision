@@ -58,12 +58,13 @@ def getCentreBall(image):
     print("Centre balle 1 :", center1)
     
     cv2.imshow('Reco_balles',frame)
-    cv2.waitKey(0.1)
+    cv2.waitKey(1)
     
     return center1,radius1
 
 
-
+image = cv2.imread("naoreal_0003.png")
+c, r = getCentreBall(image)
 
 
 
