@@ -45,7 +45,7 @@ def getCentreBall(frame):
     
     
     ret1,thresh1 = cv2.threshold(mask1,127,255,0)
-    im2,contours1,hierarchy1 = cv2.findContours(thresh1, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    contours1,hierarchy1 = cv2.findContours(thresh1, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     cnt1 = contours1[0]
     
     
@@ -71,17 +71,17 @@ def getCentreBall(frame):
 
 
 
-# Real images
-for i in range(422):
-    print("NewImage", str(i).zfill(4))
-    try:
-        image = cv2.imread("/home/matthieu/Documents/Annee_3/UV56_Visual_Servoing/naorealimgs/naoreal_"+str(i).zfill(4)+".png")
-        c, r = getCentreBall(image)
-    except:
-        print("Unable to read that image")
-    key = cv2.waitKey(0) & 0xFF
-    if key == 27:
-        break
+# # Real images
+# for i in range(422):
+#     print("NewImage", str(i).zfill(4))
+#     try:
+#         image = cv2.imread("/home/matthieu/Documents/Annee_3/UV56_Visual_Servoing/naorealimgs/naoreal_"+str(i).zfill(4)+".png")
+#         c, r = getCentreBall(image)
+#     except:
+#         print("Unable to read that image")
+#     key = cv2.waitKey(0) & 0xFF
+#     if key == 27:
+#         break
 
 
 
