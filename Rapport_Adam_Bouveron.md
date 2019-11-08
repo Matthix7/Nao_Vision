@@ -1,5 +1,5 @@
-RAPPORT BE ACOUSTIQUE SOUS-MARINE ET TEMPS-FRÉQUENCE
-====================================================
+RAPPORT BE ACOUSTIQUE SOUS-MARINE ET TEMPS-FRÉQUENCE --- Adam Philibert & Bouveron Matthieu
+===========================================================================================
 
 
 
