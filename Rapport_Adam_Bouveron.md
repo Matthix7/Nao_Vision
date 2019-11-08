@@ -7,7 +7,7 @@ RAPPORT BE ACOUSTIQUE SOUS-MARINE ET TEMPS-FRÉQUENCE
 Chants de baleines et temps-fréquence
 -------------------------------------
 
-###STFT inverse et filtrage    
+### STFT inverse et filtrage    
 
 -Le premier code fourni commence par créer un signal avec une modulation fréquentielle linéaire.
 On lui applique ensuite une fenêtre de Hamming puis une transformée de Fourier à court terme.
