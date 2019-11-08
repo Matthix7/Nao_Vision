@@ -27,5 +27,28 @@ dessine une région d'intérêt à la main autour des zones où l'énergie est l
 
 
 
+### Application aux chants de baleines
+
+- Le spectrogramme est la représentation la plus adaptée car il permet de visualiser et localiser dans le temps les bandes de fréquences correspondant au bruit, ce qui est utile pour le filtrage.  
+
+- Les vocalises sont visibles sur le spectrogramme, mais ont une énergie faible par rapport au bruit. Elles sont dans les basses fréquences.  
+
+- Le bruit est permanent, avec une énergie importante.  
+
+- Les vocalises sont audibles mais très graves et partiellement masquées par le bruit. Pour les rendre audibles avec la fonction *sound* de Matlab, il suffit d'augmenter la fréquence d'échantillonage ("accélérer l'audio").  
+
+	- Connaissant le spectrogramme du signal bruité, nous savons dans quelle zone se trouvent les vocalises et nous fabriquons un filtre qui les englobe en passant toutes les autres zones à 0. Cela permet de récupérer la vocalise avec sa première harmonique (d'énergie netteent plus faible encore).  
+
+	- Nous combinons ensuite ce premier filtre manuel avec un filtre permettant de prendre en compte les énergie, en considérant que les pics d'énergie les plus important parmi les restants correspondent à la vocalise et ses harmoniques.  
+
+
+
+
+
+
+
+
+
+
 
 
