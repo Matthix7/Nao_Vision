@@ -41,6 +41,27 @@ dessine une région d'intérêt à la main autour des zones où l'énergie est l
 
 	- Nous combinons ensuite ce premier filtre manuel avec un filtre permettant de prendre en compte les énergie, en considérant que les pics d'énergie les plus important parmi les restants correspondent à la vocalise et ses harmoniques.  
 
+	- Pour chaque filtre ajouté, on a bien éliminé du bruit et le son est plus clair.  
+
+
+### Clics d’écholocation et analyse temps-rythme
+
+On suppose que pour chaque individu le rythme d’émission des clics est approximativement constant sur une durée de 500 ms, donc en identifiant les différents rythmes d'émission on peut espérer obtenir une bonne estimation du nombre de dauphins en émission.  
+
+Pour obtenir les différents rythmes, plusieurs étapes sont nécessaires:
+
+- On commence par filtrer le signal d'origine pour faire apparaître uniquement à chaque instant s'il y a eu émission ou non. Cela donne un vecteur à valeurs binaires.
+
+- On crée ensuite une série de vecteurs sous le même format correspondant à des émissions entre 15 et 100Hz. Ils serviront de références pour analyser le signal selon ses réponses aux sollicitations de différentes fréquences.
+
+- En utilisant la fonction *xcorr* de Matlab, on relève les valeurs de corrélation entre le signal de *clics* et les différents signaux de référence. Une valeur élevée montre la présence d'un dauphin émettant à cette fréquence. En comptant les fréquences pour lesquelles on obtient une forte corrélation, on obtient une estimation du nombre de dauphins.
+
+
+
+
+
+*ADAM Philibert & BOUVERON Matthieu*
+
 
 
 
