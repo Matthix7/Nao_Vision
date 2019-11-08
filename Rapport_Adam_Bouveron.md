@@ -20,3 +20,13 @@ Par transformée de Fourier appliquée avec une fenêtre de Hamming, on retrouve
 Cette évolution suit toujours une droite, mais l'influence du bruit est visible sur le spectrogramme. Pour l'éliminer, nous construisons
 donc un masque autour de la droite d'intérêt qui aura pour effet de couper les fréquences qui en sont éloignées.
 Puis nous reconstruisons le signal débruité par transformée inverse.  
+
+	* Première solution pour le masque: on considère la matrice issue de la transformée de Fourier à court terme comme une image et on 
+dessine une région d'intérêt à la main autour des zones où l'énergie est la plus élevée. Cela nous donne un masque binaire, que l'on utilise pour ne conserver que les parties intéressantes du spectrogramme. A partir de ce spectrogramme filtré on peut alors reconstruire le signal débruité par transformée inverse.  
+
+	* Seconde solution pour le masque: on filtre automatiquement en utilisant un seuil d'énergie. Pour que le filtrage soit à peu près généralisable, nous avons choisi de normaliser le spectrogramme. De même que précédemment, on reconstruit le signal à partir du spectrogramme filtré.  
+
+
+
+
+
